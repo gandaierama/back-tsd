@@ -174,10 +174,6 @@ class DatabaseManager implements ConnectionResolverInterface
             $connection->setEventDispatcher($this->app['events']);
         }
 
-        if ($this->app->bound('db.transactions')) {
-            $connection->setTransactionManager($this->app['db.transactions']);
-        }
-
         // Here we'll set a reconnector callback. This reconnector can be any callable
         // so we will set a Closure to reconnect from this manager with the name of
         // the connection, which will allow us to reconnect from the connections.
@@ -247,24 +243,6 @@ class DatabaseManager implements ConnectionResolverInterface
         }
 
         return $this->refreshPdoConnections($name);
-    }
-
-    /**
-     * Set the default database connection for the callback execution.
-     *
-     * @param  string  $name
-     * @param  callable  $callback
-     * @return mixed
-     */
-    public function usingConnection($name, callable $callback)
-    {
-        $previousName = $this->getDefaultConnection();
-
-        $this->setDefaultConnection($name);
-
-        return tap($callback(), function () use ($previousName) {
-            $this->setDefaultConnection($previousName);
-        });
     }
 
     /**
@@ -357,19 +335,6 @@ class DatabaseManager implements ConnectionResolverInterface
     public function setReconnector(callable $reconnector)
     {
         $this->reconnector = $reconnector;
-    }
-
-    /**
-     * Set the application instance used by the manager.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return $this
-     */
-    public function setApplication($app)
-    {
-        $this->app = $app;
-
-        return $this;
     }
 
     /**

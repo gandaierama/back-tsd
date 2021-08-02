@@ -11,21 +11,12 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Support\ProcessUtils;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use RuntimeException;
 
 class Schedule
 {
     use Macroable;
-
-    const SUNDAY = 0;
-    const MONDAY = 1;
-    const TUESDAY = 2;
-    const WEDNESDAY = 3;
-    const THURSDAY = 4;
-    const FRIDAY = 5;
-    const SATURDAY = 6;
 
     /**
      * All of the events on the schedule.
@@ -74,7 +65,7 @@ class Schedule
 
         if (! class_exists(Container::class)) {
             throw new RuntimeException(
-                'A container implementation is required to use the scheduler. Please install the illuminate/container package.'
+                'A container implementation is required to use the scheduler. Please install illuminate/container.'
             );
         }
 
@@ -99,7 +90,7 @@ class Schedule
     public function call($callback, array $parameters = [])
     {
         $this->events[] = $event = new CallbackEvent(
-            $this->eventMutex, $callback, $parameters, $this->timezone
+            $this->eventMutex, $callback, $parameters
         );
 
         return $event;
@@ -157,7 +148,7 @@ class Schedule
         if ($job instanceof Closure) {
             if (! class_exists(CallQueuedClosure::class)) {
                 throw new RuntimeException(
-                    'To enable support for closure jobs, please install the illuminate/queue package.'
+                    'To enable support for closure jobs, please install illuminate/queue.'
                 );
             }
 
@@ -208,41 +199,15 @@ class Schedule
     {
         return collect($parameters)->map(function ($value, $key) {
             if (is_array($value)) {
-                return $this->compileArrayInput($key, $value);
-            }
-
-            if (! is_numeric($value) && ! preg_match('/^(-.$|--.*)/i', $value)) {
+                $value = collect($value)->map(function ($value) {
+                    return ProcessUtils::escapeArgument($value);
+                })->implode(' ');
+            } elseif (! is_numeric($value) && ! preg_match('/^(-.$|--.*)/i', $value)) {
                 $value = ProcessUtils::escapeArgument($value);
             }
 
             return is_numeric($key) ? $value : "{$key}={$value}";
         })->implode(' ');
-    }
-
-    /**
-     * Compile array input for a command.
-     *
-     * @param  string|int  $key
-     * @param  array  $value
-     * @return string
-     */
-    public function compileArrayInput($key, $value)
-    {
-        $value = collect($value)->map(function ($value) {
-            return ProcessUtils::escapeArgument($value);
-        });
-
-        if (Str::startsWith($key, '--')) {
-            $value = $value->map(function ($value) use ($key) {
-                return "{$key}={$value}";
-            });
-        } elseif (Str::startsWith($key, '-')) {
-            $value = $value->map(function ($value) use ($key) {
-                return "{$key} {$value}";
-            });
-        }
-
-        return $value->implode(' ');
     }
 
     /**
@@ -309,7 +274,7 @@ class Schedule
                 $this->dispatcher = Container::getInstance()->make(Dispatcher::class);
             } catch (BindingResolutionException $e) {
                 throw new RuntimeException(
-                    'Unable to resolve the dispatcher from the service container. Please bind it or install the illuminate/bus package.',
+                    'Unable to resolve the dispatcher from the service container. Please bind it or install illuminate/bus.',
                     $e->getCode(), $e
                 );
             }

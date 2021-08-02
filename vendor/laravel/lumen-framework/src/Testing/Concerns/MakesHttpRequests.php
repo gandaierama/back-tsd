@@ -15,7 +15,7 @@ trait MakesHttpRequests
     /**
      * The last response returned by the application.
      *
-     * @var \Illuminate\Testing\TestResponse
+     * @var \Illuminate\Http\Response
      */
     protected $response;
 
@@ -249,8 +249,6 @@ trait MakesHttpRequests
                     "JSON was not returned from [{$this->currentUri}]."
                 );
             }
-
-            return $this->seeJsonContains($decodedResponse, $negate);
         }
 
         return $this->seeJsonContains($data, $negate);

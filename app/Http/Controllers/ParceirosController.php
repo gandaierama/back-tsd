@@ -13,6 +13,12 @@ class ParceirosController extends Controller
         return response()->json($objects);
     }
 
+    public function listView(){
+        $objects = Parceiros::all();
+        return view('parceiros', compact('objects'));
+        
+    }
+
     public function get($id){
         $object = Parceiros::find($id);
         return response()->json($object);

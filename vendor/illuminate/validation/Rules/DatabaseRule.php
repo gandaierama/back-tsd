@@ -62,22 +62,18 @@ trait DatabaseRule
             return $table;
         }
 
-        if (is_subclass_of($table, Model::class)) {
-            $model = new $table;
+        $model = new $table;
 
-            return implode('.', array_map(function (string $part) {
-                return trim($part, '.');
-            }, array_filter([$model->getConnectionName(), $model->getTable()])));
-        }
-
-        return $table;
+        return $model instanceof Model
+                ? $model->getTable()
+                : $table;
     }
 
     /**
      * Set a "where" constraint on the query.
      *
      * @param  \Closure|string  $column
-     * @param  array|string|int|null  $value
+     * @param  array|string|null  $value
      * @return $this
      */
     public function where($column, $value = null)

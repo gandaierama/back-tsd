@@ -1,67 +1,52 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/**
+ * @var $router \Laravel\Lumen\Routing\Router
+ */
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+$router->group([
+    'prefix'     => 'api',
+    'middleware' => ['auth', 'permission']
+], function () use ($router) {
+    $router->post('/login', 'LoginController@login');
+    $router->post('/logout', 'LoginController@logout');
 
+    $router->get('/admins', 'AdminController@list');
+    $router->addRoute(['GET', 'POST'], '/admins/create', 'AdminController@create');
+    $router->addRoute(['GET', 'POST'], '/admins/update', 'AdminController@update');
+    $router->post('/admins/delete', 'AdminController@delete');
+    $router->get('/admins/info', 'AdminController@info');
+    $router->post('/admins/reset-password', 'AdminController@resetPassword');
+    $router->post('/admins/update-password', 'AdminController@updatePassword');
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+    $router->get('/roles', 'RoleController@list');
+    $router->addRoute(['GET', 'POST'], '/roles/create', 'RoleController@create');
+    $router->addRoute(['GET', 'POST'], '/roles/update', 'RoleController@update');
+    $router->post('/roles/delete', 'RoleController@delete');
+
+    $router->get('/permissions', 'PermissionController@list');
+    $router->addRoute(['GET', 'POST'], '/permissions/create', 'PermissionController@create');
+    $router->addRoute(['GET', 'POST'], '/permissions/update', 'PermissionController@update');
+    $router->post('/permissions/delete', 'PermissionController@delete');
+
+    $router->post('/upload/file', 'UploadController@file');
 });
 
+$router->get('/', function () {
+    return view('app');
+});
 
-$router->group(['prefix' => 'api'], function () use ($router) {
-	$app=$router;
-
-
-    //Clientes Contratantes
-    $app->get('clientes', 'ClientesController@list');
-    $app->get('cliente/{id}', 'ClientesController@create');
-    $app->post('cliente/{id}', 'ClientesController@get');
-    $app->post('cliente-edit/{id}', 'ClientesController@edit');
-    $app->put('cliente/{id}', 'ClientesController@update');
-    $app->delete('cliente/{id}', 'ClientesController@delete');
-    $app->delete('cliente/login', 'ClientesController@login');
-
-    //Motoboys
-    $app->get('parceiros', 'ParceirosController@list');
-    $app->get('parceiros/{id}', 'ParceirosController@create');
-    $app->post('parceiros/{id}', 'ParceirosController@get');
-    $app->post('parceiros-edit/{id}', 'ParceirosController@edit');
-    $app->put('parceiros/{id}', 'ParceirosController@update');
-    $app->delete('parceiros/{id}', 'ParceirosController@delete');
-    $app->delete('parceiros/login', 'ParceirosController@login');
+$router->get('/parceiros', 'ParceirosController@listView');
 
 
-    //Administradores
-    $app->get('usuarios', 'UsuariosController@list');
-    $app->post('usuarios', 'UsuariosController@create');
-    $app->get('usuarios/{id}', 'UsuariosController@get');
-    $app->post('usuarios-edit/{id}', 'UsuariosController@edit');
-    $app->put('usuarios/{id}', 'UsuariosController@update');
-    $app->delete('usuarios/{id}', 'UsuariosController@delete');
+$router->get('/users', function () {
+    return view('users');
+});
 
-    //Ordens de serviço
-    $app->get('pedidos', 'PedidosController@list');
-    $app->get('pedidos/{id}', 'PedidosController@create');
-    $app->post('pedidos/{id}', 'PedidosController@get');
-    $app->post('pedidos/{id}', 'PedidosController@edit');
-    $app->put('pedidos-edit/{id}', 'PedidosController@update');
-    $app->put('pedidos-track/{id}', 'PedidosController@track');
-    $app->delete('pedidos/{id}', 'PedidosController@delete');
-    $app->post('pedidos/pagar/{id}', 'PedidosController@pagar');
-    $app->post('pedidos/map/{id}', 'PedidosController@map');
-    $app->post('pedidos/cancelar/{id}', 'PedidosController@cancelar');
+$router->get('/orders', function () {
+    return view('orders');
+});
 
-
-
+$router->get('/acompanhamento', function () {
+    return view('acompanhamento');
 });

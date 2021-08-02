@@ -151,9 +151,8 @@ class Listener
             'queue:work',
             $connection,
             '--once',
-            "--name={$options->name}",
             "--queue={$queue}",
-            "--backoff={$options->backoff}",
+            "--delay={$options->delay}",
             "--memory={$options->memory}",
             "--sleep={$options->sleep}",
             "--tries={$options->maxTries}",
@@ -215,7 +214,7 @@ class Listener
      */
     public function stop()
     {
-        exit;
+        die;
     }
 
     /**

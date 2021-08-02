@@ -48,7 +48,7 @@ trait RegistersExceptionHandlers
         });
 
         set_exception_handler(function ($e) {
-            $this->handleException($e);
+            $this->handleUncaughtException($e);
         });
 
         register_shutdown_function(function () {
@@ -77,7 +77,7 @@ trait RegistersExceptionHandlers
      */
     protected function fatalErrorFromPhpError(array $error, $traceOffset = null)
     {
-        return new FatalError($error['message'], 0, $error, $traceOffset);
+        return new FatalError($error['message'], $error, $traceOffset);
     }
 
     /**
@@ -95,7 +95,7 @@ trait RegistersExceptionHandlers
      * Send the exception to the handler and return the response.
      *
      * @param  \Throwable  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function sendExceptionToHandler(Throwable $e)
     {
@@ -112,7 +112,7 @@ trait RegistersExceptionHandlers
      * @param  \Throwable  $e
      * @return void
      */
-    protected function handleException(Throwable $e)
+    protected function handleUncaughtException(Throwable $e)
     {
         $handler = $this->resolveExceptionHandler();
 

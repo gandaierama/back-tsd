@@ -4,7 +4,6 @@ namespace Illuminate\Bus;
 
 use Closure;
 use Illuminate\Queue\CallQueuedClosure;
-use Illuminate\Queue\SerializableClosure;
 use Illuminate\Support\Arr;
 use RuntimeException;
 
@@ -39,13 +38,6 @@ trait Queueable
     public $chainQueue;
 
     /**
-     * The callbacks to be executed on chain failure.
-     *
-     * @var array|null
-     */
-    public $chainCatchCallbacks;
-
-    /**
      * The number of seconds before the job should be made available.
      *
      * @var \DateTimeInterface|\DateInterval|int|null
@@ -53,16 +45,7 @@ trait Queueable
     public $delay;
 
     /**
-     * Indicates whether the job should be dispatched after all database transactions have committed.
-     *
-     * @var bool|null
-     */
-    public $afterCommit;
-
-    /**
      * The middleware the job should be dispatched through.
-     *
-     * @var array
      */
     public $middleware = [];
 
@@ -141,30 +124,6 @@ trait Queueable
     }
 
     /**
-     * Indicate that the job should be dispatched after all database transactions have committed.
-     *
-     * @return $this
-     */
-    public function afterCommit()
-    {
-        $this->afterCommit = true;
-
-        return $this;
-    }
-
-    /**
-     * Indicate that the job should not wait until database transactions have been committed before dispatching.
-     *
-     * @return $this
-     */
-    public function beforeCommit()
-    {
-        $this->afterCommit = false;
-
-        return $this;
-    }
-
-    /**
      * Specify the middleware the job should be dispatched through.
      *
      * @param  array|object  $middleware
@@ -195,7 +154,8 @@ trait Queueable
     /**
      * Serialize a job for queuing.
      *
-     * @param  mixed  $job
+     * @param mixed $job
+     *
      * @return string
      */
     protected function serializeJob($job)
@@ -203,7 +163,7 @@ trait Queueable
         if ($job instanceof Closure) {
             if (! class_exists(CallQueuedClosure::class)) {
                 throw new RuntimeException(
-                    'To enable support for closure jobs, please install the illuminate/queue package.'
+                    'To enable support for closure jobs, please install illuminate/queue.'
                 );
             }
 
@@ -229,21 +189,7 @@ trait Queueable
 
                 $next->chainConnection = $this->chainConnection;
                 $next->chainQueue = $this->chainQueue;
-                $next->chainCatchCallbacks = $this->chainCatchCallbacks;
             }));
         }
-    }
-
-    /**
-     * Invoke all of the chain's failed job callbacks.
-     *
-     * @param  \Throwable  $e
-     * @return void
-     */
-    public function invokeChainCatchCallbacks($e)
-    {
-        collect($this->chainCatchCallbacks)->each(function ($callback) use ($e) {
-            $callback instanceof SerializableClosure ? $callback->__invoke($e) : call_user_func($callback, $e);
-        });
     }
 }

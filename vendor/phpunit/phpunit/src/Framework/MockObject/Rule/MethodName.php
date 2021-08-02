@@ -9,7 +9,6 @@
  */
 namespace PHPUnit\Framework\MockObject\Rule;
 
-use function is_string;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\InvalidArgumentException;
 use PHPUnit\Framework\MockObject\Invocation as BaseInvocation;
@@ -26,18 +25,19 @@ final class MethodName
     private $constraint;
 
     /**
-     * @param Constraint|string $constraint
+     * @param  Constraint|string
      *
-     * @throws InvalidArgumentException
+     * @throws Constraint
+     * @throws \PHPUnit\Framework\Exception
      */
     public function __construct($constraint)
     {
-        if (is_string($constraint)) {
-            $constraint = new MethodNameConstraint($constraint);
-        }
-
         if (!$constraint instanceof Constraint) {
-            throw InvalidArgumentException::create(1, 'PHPUnit\Framework\Constraint\Constraint object or string');
+            if (!\is_string($constraint)) {
+                throw InvalidArgumentException::create(1, 'string');
+            }
+
+            $constraint = new MethodNameConstraint($constraint);
         }
 
         $this->constraint = $constraint;
@@ -57,12 +57,8 @@ final class MethodName
         return $this->matchesName($invocation->getMethodName());
     }
 
-    /**
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
     public function matchesName(string $methodName): bool
     {
-        return (bool) $this->constraint->evaluate($methodName, '', true);
+        return $this->constraint->evaluate($methodName, '', true);
     }
 }

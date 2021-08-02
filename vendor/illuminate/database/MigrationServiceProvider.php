@@ -2,7 +2,6 @@
 
 namespace Illuminate\Database;
 
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Database\Console\Migrations\FreshCommand;
 use Illuminate\Database\Console\Migrations\InstallCommand;
@@ -103,7 +102,7 @@ class MigrationServiceProvider extends ServiceProvider implements DeferrableProv
     protected function registerCommands(array $commands)
     {
         foreach (array_keys($commands) as $command) {
-            $this->{"register{$command}Command"}();
+            call_user_func_array([$this, "register{$command}Command"], []);
         }
 
         $this->commands(array_values($commands));
@@ -117,7 +116,7 @@ class MigrationServiceProvider extends ServiceProvider implements DeferrableProv
     protected function registerMigrateCommand()
     {
         $this->app->singleton('command.migrate', function ($app) {
-            return new MigrateCommand($app['migrator'], $app[Dispatcher::class]);
+            return new MigrateCommand($app['migrator']);
         });
     }
 
