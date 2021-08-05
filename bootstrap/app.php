@@ -113,7 +113,7 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
-$app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+//$app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 $app->register(App\Providers\HttpResponseServiceProvider::class);
 
 return $app;
