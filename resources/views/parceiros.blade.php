@@ -156,8 +156,42 @@
                       </div>
 
                       <div class="col-md-6">
+                        <div >
+                          <label class="form-label" for="customFile">Documento da moto</label>
+                          <input type="file" class="form-control" id="customFile" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div >
+                          <label class="form-label" for="customFile">Habilitação</label>
+                          <input type="file" class="form-control" id="customFile" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div >
+                          <label class="form-label" for="customFile">Certificado MEI</label>
+                          <input type="file" class="form-control" id="customFile" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div >
+                          <label class="form-label" for="customFile">Foto da moto com a placa</label>
+                          <input type="file" class="form-control" id="customFile" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div >
+                          <label class="form-label" for="customFile">Foto da moto com a placa</label>
+                          <input type="file" class="form-control" id="customFile" />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Documento MEI</label>
+                          <label class="bmd-label-floating">Foto rosto com a cnh na mão</label>
                           <input type="file" >
                         </div>
                       </div>
@@ -176,7 +210,27 @@
                         </div>
                       </div>
                     </div>
-             
+                    
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Telefone Contato 1</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Telefone Contato 2</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Telefone Contato 3</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
                     <div class="clearfix"></div>
                   </form>
       </div>
