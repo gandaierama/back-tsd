@@ -193,7 +193,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group">
+                        <div >
                           <label class="bmd-label-floating">Foto rosto com a cnh na mão</label>
                           <input type="file" >
                         </div>
