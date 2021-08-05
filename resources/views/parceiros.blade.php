@@ -147,6 +147,34 @@
                           <input type="text" class="form-control">
                         </div>
                       </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Documento Moto</label>
+                          <input type="file" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Documento MEI</label>
+                          <input type="file" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Documento CNH Frente</label>
+                          <input type="file" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Documento CNH Verso</label>
+                          <input type="file" class="form-control">
+                        </div>
+                      </div>
                     </div>
              
                     <div class="clearfix"></div>
