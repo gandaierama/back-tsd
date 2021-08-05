@@ -27,6 +27,12 @@
               <p>Parceiros</p>
             </a>
           </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/parceiros">
+              <i class="material-icons">person</i>
+              <p>Clientes</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="/orders">
               <i class="material-icons">content_paste</i>
