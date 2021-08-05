@@ -27,10 +27,8 @@ class TranslationWriter implements TranslationWriterInterface
 
     /**
      * Adds a dumper to the writer.
-     *
-     * @param string $format The format of the dumper
      */
-    public function addDumper($format, DumperInterface $dumper)
+    public function addDumper(string $format, DumperInterface $dumper)
     {
         $this->dumpers[$format] = $dumper;
     }
@@ -63,7 +61,7 @@ class TranslationWriter implements TranslationWriterInterface
         $dumper = $this->dumpers[$format];
 
         if (isset($options['path']) && !is_dir($options['path']) && !@mkdir($options['path'], 0777, true) && !is_dir($options['path'])) {
-            throw new RuntimeException(sprintf('Translation Writer was not able to create directory "%s"', $options['path']));
+            throw new RuntimeException(sprintf('Translation Writer was not able to create directory "%s".', $options['path']));
         }
 
         // save
