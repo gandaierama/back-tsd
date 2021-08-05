@@ -121,6 +121,9 @@
                       </div>
                     </div>
                     <div class="row">
+                      <hr />
+                    </div>
+                    <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Endereço</label>
@@ -196,39 +199,28 @@
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+       
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Documento CNH Frente</label>
-                          <input type="file" >
+                          <label class="bmd-label-floating">Telefone Contato 1</label>
+                          <input type="text" class="form-control">
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Documento CNH Verso</label>
-                          <input type="file" >
+                          <label class="bmd-label-floating">Telefone Contato 2</label>
+                          <input type="text" class="form-control">
                         </div>
                       </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="bmd-label-floating">Telefone Contato 1</label>
-                        <input type="text" class="form-control">
-                      </div>
-                    </div>
 
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="bmd-label-floating">Telefone Contato 2</label>
-                        <input type="text" class="form-control">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="bmd-label-floating">Telefone Contato 3</label>
-                        <input type="text" class="form-control">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Telefone Contato 3</label>
+                          <input type="text" class="form-control">
+                        </div>
                       </div>
                     </div>
                     <div class="clearfix"></div>
