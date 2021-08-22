@@ -37,6 +37,7 @@ $router->get('/', function () {
 });
 
 $router->get('/parceiros', 'ParceirosController@listView');
+$router->post('/api/parceiros', 'ParceirosController@create');
 
 
 $router->get('/users', function () {
