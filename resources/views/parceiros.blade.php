@@ -54,7 +54,7 @@
                             <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                                 <i class="material-icons">edit</i>
                               </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                              <button type="button" rel="tooltip" title="Remove" data-delete="{{ $item['id'] }}" class="btn btn-danger btn-link btn-sm btn-delete">
                                 <i class="material-icons">close</i>
                               </button>
                           </td>
@@ -295,6 +295,26 @@
                   location.reload();
         }
     });
+});
+
+  $('.btn-delete').click( function() {
+    console.log("foi");
+
+    let id=$(this).data("delete");
+    if (window.confirm("Você realmente quer apagar o id: "+id+" ?")) {
+      $.ajax({
+          url: '/api/parceiros/delete/'+id,
+          type: 'post',
+          dataType: 'json',
+          data: { 'id': id },
+          success: function(data) {
+          
+                    location.reload();
+          }
+      });
+    }
+
+    
 });
 </script>
 @include('shared/footer')
