@@ -28,7 +28,26 @@ class ParceirosController extends Controller
      
         $object = new Parceiros();
 
-        $object->name     = $request->name;
+        $object->nome     = $request->nome;
+        $object->email     = $request->email;
+        $object->cpf     = $request->cpf;
+        $object->cnpj     = $request->cnpj;
+        $object->cnh     = $request->cnh;
+        $object->banco     = $request->banco;
+        $object->agencia     = $request->agencia;
+        $object->conta     = $request->conta;
+        $object->endereco     = $request->endereco;
+        $object->cep     = $request->cep;
+        $object->numero     = $request->numero;
+        $object->complemento     = $request->cep;
+        $object->bairro     = $request->bairro;
+        $object->nascimento     = $request->nascimento;
+        
+        $object->telefone1     = $request->telefone1;
+        $object->telefone2     = $request->telefone2;
+        $object->telefone3     = $request->telefone3;
+        
+   
 
         
         $object->save();
