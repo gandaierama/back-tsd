@@ -85,24 +85,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="form-cad">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nome</label>
-                          <input type="text" class="form-control" >
+                          <input name="nome" type="text" class="form-control" >
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">CPF</label>
-                          <input type="text" class="form-control">
+                          <input  name="cpf" type="text" class="form-control">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">E-mail</label>
-                          <input type="email" class="form-control">
+                          <input  name="email" type="email" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -116,7 +116,32 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">CNH</label>
-                          <input type="text" class="form-control">
+                          <input  name="cnh" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <hr />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Banco</label>
+                          <input type="text" name="banco" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Agência</label>
+                          <input name="agencia" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Conta</label>
+                          <input name="conta" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -129,7 +154,19 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Endereço</label>
-                          <input type="text" class="form-control">
+                          <input  name="endereco" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Número</label>
+                          <input  name="numero" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Complemento</label>
+                          <input  name="complemento" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -137,26 +174,26 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Cidade</label>
-                          <input type="text" class="form-control">
+                          <input  name="cidade" type="text" class="form-control">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Estado</label>
-                          <input type="text" class="form-control">
+                          <input  name="estado" type="text" class="form-control">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">CEP</label>
-                          <input type="text" class="form-control">
+                          <input name="cep" type="text" class="form-control">
                         </div>
                       </div>
 
                       <div class="col-md-6">
                         <div >
                           <label class="form-label" for="customFile">Comprovante de residência</label>
-                          <input type="file" class="form-control" id="customFile" />
+                          <input  name="doc_comprovante" type="file" class="form-control" id="customFile" />
                         </div>
                       </div>
 
@@ -177,7 +214,7 @@
                       <div class="col-md-6">
                         <div >
                           <label class="form-label" for="customFile">Certificado MEI</label>
-                          <input type="file" class="form-control" id="customFile" />
+                          <input  name="doc_mei" type="file" class="form-control" id="customFile" />
                         </div>
                       </div>
 
@@ -213,21 +250,21 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Telefone Contato 1</label>
-                          <input type="text" class="form-control">
+                          <input  name="telefone1" type="text" class="form-control">
                         </div>
                       </div>
 
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Telefone Contato 2</label>
-                          <input type="text" class="form-control">
+                          <input  name="telefone2" type="text" class="form-control">
                         </div>
                       </div>
 
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Telefone Contato 3</label>
-                          <input type="text" class="form-control">
+                          <input  name="telefone3" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -236,10 +273,28 @@
       </div>
       <div class="modal-footer">
         
-        <button type="button" class="btn btn-primary">Salvar</button>
+        <button type="button" id="btn-cadastrar" class="btn btn-primary">Salvar</button>
       </div>
     </div>
   </div>
 </div>
 
+
+<script>
+  $('#btn-cadastrar').click( function() {
+    console.log("foi");
+    $("#btn-cadastrar").hide();
+    $('#form-cad input').attr('readonly', true);
+    $.ajax({
+        url: '/api/parceiros',
+        type: 'post',
+        dataType: 'json',
+        data: $('#form-cad').serialize(),
+        success: function(data) {
+                  $("#basicExampleModal").hide();
+                  location.reload();
+        }
+    });
+});
+</script>
 @include('shared/footer')
