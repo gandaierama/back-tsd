@@ -517,7 +517,7 @@
 <script>
   $('.btn-editar').click( function() {
     console.log("foi");
-    $("#basicExampleModal2").show();
+    
     $(this).hide();
     let id=$(this).data("delete");
     $('#form-ed input').attr('readonly', true);
@@ -526,7 +526,8 @@
         type: 'get',
         dataType: 'json',
         success: function(data) {
-
+          $("#basicExampleModal2").show();
+          $(this).show();
                   console.log(data);
         }
     });
@@ -543,7 +544,7 @@ $('.btn-delete').click( function() {
           dataType: 'json',
           data: { 'id': id },
           success: function(data) {
-          
+                  
                     location.reload();
           }
       });
