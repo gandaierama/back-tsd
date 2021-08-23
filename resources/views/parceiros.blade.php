@@ -526,7 +526,7 @@
         type: 'get',
         dataType: 'json',
         success: function(data) {
-          $("#basicExampleModal2").show();
+          $("#basicExampleModal2").modal({show:true});
           $(this).show();
                   console.log(data);
         }
@@ -562,7 +562,7 @@ $('.btn-delete').click( function() {
         dataType: 'json',
         data: $('#form-cad').serialize(),
         success: function(data) {
-                  $("#basicExampleModal").hide();
+                  $("#basicExampleModal2").modal({show:false});
                   location.reload();
         }
     });
