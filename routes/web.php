@@ -32,35 +32,24 @@ $router->group([
     $router->post('/upload/file', 'UploadController@file');
 });
 
-
-// $router->group([
-//     'middleware' => ['auth']
-// ], function () use ($router) { 
-    $router->get('/', function () {
-        return view('app');
-    });
+$router->get('/', function () {
+    return view('app');
+});
 
     $router->get('/parceiros', 'ParceirosController@listView');
+    $router->get('/api/parceiros/{id}', 'ParceirosController@get');
     $router->post('/api/parceiros', 'ParceirosController@create');
     $router->post('/api/parceiros/delete/{id}', 'ParceirosController@delete');
 
-    $router->get('/login', function () {
-        return view('login');
-    });
 
-    $router->get('/users', function () {
-        return view('users');
-    });
+$router->get('/users', function () {
+    return view('users');
+});
 
-    $router->get('/orders', function () {
-        return view('orders');
-    });
+$router->get('/orders', function () {
+    return view('orders');
+});
 
-    $router->get('/acompanhamento', function () {
-        return view('acompanhamento');
-    });
-// }
-
-$router->get('/login', function () {
-        return view('login');
-    });
+$router->get('/acompanhamento', function () {
+    return view('acompanhamento');
+});
