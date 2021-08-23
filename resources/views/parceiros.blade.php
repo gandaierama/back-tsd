@@ -519,7 +519,7 @@
     console.log("foi");
     
     $(this).hide();
-    let id=$(this).data("delete");
+    let id=$(this).data("id");
     $('#form-ed input').attr('readonly', true);
     $.ajax({
         url: '/api/parceiros/'+id,
@@ -536,7 +536,7 @@
 
 $('.btn-delete').click( function() {
     console.log("foi");
-    let id=$(this).data("delete");
+    let id=$(this).data("id");
     if (window.confirm("Você realmente quer apagar o id: "+id+" ?")) {
       $.ajax({
           url: '/api/parceiros/delete/'+id,
