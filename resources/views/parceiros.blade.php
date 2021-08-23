@@ -1,6 +1,30 @@
 @include('shared/header')
+<style>
+  .loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    display:none;
 
-
+  }
+  .loader div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<div class="loader">
+  <div>
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Carregando...</span>
+  </div>
+</div>
+</div>
 <div class="wrapper ">
     @include('shared/sidebar')
     <div class="main-panel">
@@ -517,8 +541,7 @@
 <script>
   $('.btn-editar').click( function() {
     console.log("foi");
-    
-    $(this).hide();
+    $(".loader").show();
     let id=$(this).data("id");
     $('#form-ed input').attr('readonly', true);
     $.ajax({
@@ -526,9 +549,24 @@
         type: 'get',
         dataType: 'json',
         success: function(data) {
-          $("#basicExampleModal2").modal({show:true});
-          $(this).show();
+          $("#basicExampleModal2").modal();
+        
+          $('#form-ed input').attr('readonly', false);
                   console.log(data);
+                  $('#form-ed input[name="nome"]').val(data.nome);
+                  $('#form-ed input[name="email"]').val(data.email);
+                  $('#form-ed input[name="cpf"]').val(data.cpf);
+                  $('#form-ed input[name="cnpj"]').val(data.cnpj);
+                  $('#form-ed input[name="cnh"]').val(data.cnh);
+                  $('#form-ed input[name="cep"]').val(data.cep);
+                  $('#form-ed input[name="bairro"]').val(data.bairro);
+                  $('#form-ed input[name="cidade"]').val(data.cidade);
+                  $('#form-ed input[name="estado"]').val(data.estado);
+                  $('#form-ed input[name="banco"]').val(data.banco);
+                  $('#form-ed input[name="agencia"]').val(data.agencia);
+                  $('#form-ed input[name="conta"]').val(data.conta);
+                  $('#form-ed input[name="pix"]').val(data.pix);
+                  $(".loader").hide();
         }
     });
 });
@@ -538,13 +576,14 @@ $('.btn-delete').click( function() {
     console.log("foi");
     let id=$(this).data("id");
     if (window.confirm("Você realmente quer apagar o id: "+id+" ?")) {
+      $(".loader").show();
       $.ajax({
           url: '/api/parceiros/delete/'+id,
           type: 'post',
           dataType: 'json',
           data: { 'id': id },
           success: function(data) {
-                  
+                  $(".loader").hide();
                     location.reload();
           }
       });
@@ -554,6 +593,7 @@ $('.btn-delete').click( function() {
 
   $('#btn-cadastrar').click( function() {
     console.log("foi");
+    $(".loader").show();
     $("#btn-cadastrar").hide();
     $('#form-cad input').attr('readonly', true);
     $.ajax({
@@ -562,6 +602,7 @@ $('.btn-delete').click( function() {
         dataType: 'json',
         data: $('#form-cad').serialize(),
         success: function(data) {
+          $(".loader").hide();
                   $("#basicExampleModal2").modal({show:false});
                   location.reload();
         }
