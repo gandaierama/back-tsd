@@ -54,7 +54,7 @@
                             <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                                 <i class="material-icons">edit</i>
                               </button>
-                              <button type="button" rel="tooltip" title="Remove" data-delete="{{ $item['id'] }}" class="btn btn-danger btn-link btn-sm btn-delete">
+                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
                                 <i class="material-icons">close</i>
                               </button>
                           </td>
@@ -144,6 +144,14 @@
                           <input name="conta" type="text" class="form-control">
                         </div>
                       </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Chave Pix</label>
+                          <input type="text" name="pix" class="form-control">
+                        </div>
+                      </div>
+
                     </div>
                     <div class="row">
                       <div class="col-md-12">
@@ -295,26 +303,6 @@
                   location.reload();
         }
     });
-});
-
-  $('.btn-delete').click( function() {
-    console.log("foi");
-
-    let id=$(this).data("delete");
-    if (window.confirm("Você realmente quer apagar o id: "+id+" ?")) {
-      $.ajax({
-          url: '/api/parceiros/delete/'+id,
-          type: 'post',
-          dataType: 'json',
-          data: { 'id': id },
-          success: function(data) {
-          
-                    location.reload();
-          }
-      });
-    }
-
-    
 });
 </script>
 @include('shared/footer')
