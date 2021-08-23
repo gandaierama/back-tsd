@@ -39,9 +39,10 @@ class ParceirosController extends Controller
         $object->endereco     = $request->endereco;
         $object->cep     = $request->cep;
         $object->numero     = $request->numero;
-        $object->complemento     = $request->cep;
+        $object->complemento     = $request->complemento;
         $object->bairro     = $request->bairro;
         $object->nascimento     = $request->nascimento;
+        $object->pix     = $request->pix;
         
         $object->telefone1     = $request->telefone1;
         $object->telefone2     = $request->telefone2;
