@@ -54,7 +54,7 @@
                             <button type="button" data-id="{{ $item['id'] }}" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm btn-editar">
                                 <i class="material-icons">edit</i>
                               </button>
-                              <button type="button" data-id="{{ $item['id'] }}" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                              <button type="button" data-id="{{ $item['id'] }}" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm btn-delete">
                                 <i class="material-icons">close</i>
                               </button>
                           </td>
@@ -526,7 +526,7 @@
         type: 'get',
         dataType: 'json',
         success: function(data) {
-        
+
                   console.log(data);
         }
     });
